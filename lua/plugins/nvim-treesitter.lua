@@ -19,10 +19,8 @@ local config = function()
 			"bash",
 			"lua",
 			"dockerfile",
-			"django",
 			"gitignore",
 			"python",
-			"react",
 		},
 		auto_install = true,
 		highlight = {
