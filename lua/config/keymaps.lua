@@ -1,27 +1,41 @@
-local keymap = vim.keymap
+local mapkey = require("util.keymapper").mapkey
 
--- Directory Navigation
-keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+-- Buffer Navigation
+mapkey("<leader>bn", "bnext", "n") -- Next buffer
+mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
+mapkey("<leader>bb", "e #", "n") -- Switch to Other Buffer
+mapkey("<leader>`", "e #", "n") -- Switch to Other Buffer
 
--- Pane Navigation
+-- Directory Navigatio}n
+mapkey("<leader>m", "NvimTreeFocus", "n")
+mapkey("<leader>e", "NvimTreeToggle", "n")
 
-keymap.set("n", "<C-h>", "<C-w>h", opts) -- Navigate Left 
-keymap.set("n", "<C-j>", "<C-w>j", opts) -- Navigate Down 
-keymap.set("n", "<C-k>", "<C-w>k", opts) -- Navigate Up 
-keymap.set("n", "<C-l>", "<C-w>l", opts) -- Navigate Right 
+-- Pane and Window Navigation
+mapkey("<C-h>", "<C-w>h", "n") -- Navigate Left
+mapkey("<C-j>", "<C-w>j", "n") -- Navigate Down
+mapkey("<C-k>", "<C-w>k", "n") -- Navigate Up
+mapkey("<C-l>", "<C-w>l", "n") -- Navigate Right
+mapkey("<C-h>", "wincmd h", "t") -- Navigate Left
+mapkey("<C-j>", "wincmd j", "t") -- Navigate Down
+mapkey("<C-k>", "wincmd k", "t") -- Navigate Up
+mapkey("<C-l>", "wincmd l", "t") -- Navigate Right
+mapkey("<C-h>", "TmuxNavigateLeft", "n") -- Navigate Left
+mapkey("<C-j>", "TmuxNavigateDown", "n") -- Navigate Down
+mapkey("<C-k>", "TmuxNavigateUp", "n") -- Navigate Up
+mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 
--- window management
-keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split Vertically
-keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split Horizontally
-keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle Minimize
+-- Window Management
+mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
+mapkey("<leader>sh", "split", "n") -- Split Horizontally
+mapkey("<leader>sm", "MaximizerToggle", "n") -- Toggle Minimise
 
--- Identing
-keymap.set("v", "<", "<gv")
-keymap.set("v", ">", ">gv")
+-- Inde smt sing
+mapkey("<", "v", "<gv") -- Shift Indentation to Left
+mapkey(">", "v", ">gv") -- Shift Indentation to Right
 
+-- Show Full File-Path
+mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
 
 -- Comments
-vim.api.nvim_set_keymap("n", "<C-_>", "gcc", {noremap = false })
-vim.api.nvim_set_keymap("v", "<C-_>", "gcc", {noremap = false })
-
+vim.api.nvim_set_keymap("n", "<C-_>", "gtc", { noremap = false })
+vim.api.nvim_set_keymap("v", "<C-_>", "goc", { noremap = false })
